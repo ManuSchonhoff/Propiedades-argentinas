@@ -23,7 +23,7 @@ export default async function PropiedadesPage({ searchParams }: Props) {
     const priceMax = params.price ? parseInt(params.price, 10) : 0;
 
     const db = supabase();
-    let properties: ReturnType<typeof toPropertyView>[] = [];
+    let properties: (ReturnType<typeof toPropertyView> & { isBoosted?: boolean })[] = [];
 
     if (db) {
         let query = db.from("listings").select("*").eq("op", op);
@@ -54,11 +54,32 @@ export default async function PropiedadesPage({ searchParams }: Props) {
                 .in("listing_id", ids)
                 .order("sort_order", { ascending: true });
 
-            properties = listings.map((listing: ListingRow) => {
+            // Fetch active boosts
+            const now = new Date().toISOString();
+            const { data: activeBoosts } = await db
+                .from("boosts")
+                .select("listing_id")
+                .in("listing_id", ids)
+                .eq("status", "active")
+                .gt("ends_at", now);
+
+            const boostedIds = new Set((activeBoosts ?? []).map((b: { listing_id: string }) => b.listing_id));
+
+            const mapped = listings.map((listing: ListingRow) => {
                 const listingMedia = (media ?? []).filter(
                     (m: ListingMediaRow) => m.listing_id === listing.id
                 );
-                return toPropertyView(listing, listingMedia);
+                return {
+                    ...toPropertyView(listing, listingMedia),
+                    isBoosted: boostedIds.has(listing.id),
+                };
+            });
+
+            // Sort: boosted first, then by created_at (already sorted from query)
+            properties = mapped.sort((a, b) => {
+                if (a.isBoosted && !b.isBoosted) return -1;
+                if (!a.isBoosted && b.isBoosted) return 1;
+                return 0;
             });
         }
     }
@@ -85,7 +106,12 @@ export default async function PropiedadesPage({ searchParams }: Props) {
                 {properties.length > 0 ? (
                     <div className="prop-grid-styled">
                         {properties.map((property) => (
-                            <PropertyCard key={property.id} property={property} />
+                            <div key={property.id} style={{ position: "relative" }}>
+                                {property.isBoosted && (
+                                    <span className="property-badge-boost">⚡ Destacada</span>
+                                )}
+                                <PropertyCard property={property} />
+                            </div>
                         ))}
                     </div>
                 ) : (

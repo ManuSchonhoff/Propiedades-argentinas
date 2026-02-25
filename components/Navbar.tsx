@@ -15,7 +15,7 @@ export default function Navbar() {
                     Explorar <span className="nav-tag">Reel</span>
                 </Link>
                 <Link href="/nosotros">Nosotros</Link>
-                <Link href="#">Blog</Link>
+                <Link href="/pricing">Planes</Link>
             </div>
             <div className="nav-actions">
                 <Link href="/publicar" className="btn-publish">

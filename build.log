@@ -1,0 +1,48 @@
+﻿  Ôû▓ Next.js 14.2.35
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ Ô£ô Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/18) ...
+   Generating static pages (4/18) 
+   Generating static pages (8/18) 
+   Generating static pages (13/18) 
+ Ô£ô Generating static pages (18/18)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+Ôöî Ôùï /                                    1.6 kB          158 kB
+Ôö£ Ôùï /_not-found                          873 B          88.2 kB
+Ôö£ ãÆ /api/admin/mp/create-plans           0 B                0 B
+Ôö£ ãÆ /api/billing/subscribe               0 B                0 B
+Ôö£ ãÆ /api/boosts/create-preference        0 B                0 B
+Ôö£ ãÆ /api/leads                           0 B                0 B
+Ôö£ ãÆ /api/listings/[id]/delete            0 B                0 B
+Ôö£ ãÆ /api/listings/[id]/toggle            0 B                0 B
+Ôö£ ãÆ /api/listings/[id]/update            0 B                0 B
+Ôö£ ãÆ /api/mercadopago/webhook             0 B                0 B
+Ôö£ ãÆ /dashboard                           1.64 kB         158 kB
+Ôö£ ãÆ /dashboard/[id]/editar               2.48 kB         154 kB
+Ôö£ Ôùï /dashboard/billing                   175 B          96.2 kB
+Ôö£ Ôùï /explorar                            1.17 kB         102 kB
+Ôö£ Ôùï /login                               1.67 kB         153 kB
+Ôö£ Ôùï /nosotros                            970 B           152 kB
+Ôö£ Ôùï /pricing                             1.73 kB         153 kB
+Ôö£ ãÆ /propiedades                         978 B           157 kB
+Ôö£ ãÆ /propiedades/[id]                    1.81 kB         158 kB
+Ôö£ Ôùï /publicar                            3.56 kB         155 kB
+Ôöö Ôùï /registro                            1.67 kB         153 kB
++ First Load JS shared by all            87.3 kB
+  Ôö£ chunks/117-baab43fc83142998.js       31.7 kB
+  Ôö£ chunks/fd9d1056-87da80e0c187477b.js  53.6 kB
+  Ôöö other shared chunks (total)          1.95 kB
+
+
+ãÆ Middleware                             74.5 kB
+
+Ôùï  (Static)   prerendered as static content
+ãÆ  (Dynamic)  server-rendered on demand
+

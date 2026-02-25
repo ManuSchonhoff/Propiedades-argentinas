@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
+import BoostButton from "@/components/BoostButton";
 import { supabaseAuth } from "@/lib/supabase/auth";
 import type { ListingRow, ListingMediaRow } from "@/lib/supabase/types";
 
@@ -59,6 +60,25 @@ export default async function DashboardPage() {
         }
     });
 
+    /* Fetch active boosts for user's listings */
+    const now = new Date().toISOString();
+    const { data: activeBoosts } = ids.length
+        ? await sb
+            .from("boosts")
+            .select("listing_id")
+            .in("listing_id", ids)
+            .eq("status", "active")
+            .gt("ends_at", now)
+        : { data: [] };
+
+    const boostedIds = new Set((activeBoosts ?? []).map((b: { listing_id: string }) => b.listing_id));
+
+    /* Fetch boost products for the modal */
+    const { data: boostProducts } = await sb
+        .from("boost_products")
+        .select("id, code, name, price_ars, duration_hours")
+        .order("price_ars", { ascending: true });
+
     return (
         <>
             <Navbar />
@@ -72,9 +92,12 @@ export default async function DashboardPage() {
                             {(listings ?? []).length !== 1 ? "s" : ""}
                         </p>
                     </div>
-                    <Link href="/publicar" className="btn-cta">
-                        <i className="ph ph-plus"></i> Publicar Propiedad
-                    </Link>
+                    <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
+                        <Link href="/dashboard/billing" className="btn-outline btn-sm">Mi Plan</Link>
+                        <Link href="/publicar" className="btn-cta">
+                            <i className="ph ph-plus"></i> Publicar Propiedad
+                        </Link>
+                    </div>
                 </div>
 
                 {(listings ?? []).length === 0 ? (
@@ -113,6 +136,11 @@ export default async function DashboardPage() {
                                     </span>
                                 </div>
                                 <div className="dash-listing-actions">
+                                    <BoostButton
+                                        listingId={listing.id}
+                                        boostProducts={boostProducts ?? []}
+                                        hasActiveBoost={boostedIds.has(listing.id)}
+                                    />
                                     <Link href={`/dashboard/${listing.id}/editar`} className="btn-action" title="Editar">
                                         <i className="ph ph-pencil-simple"></i>
                                     </Link>

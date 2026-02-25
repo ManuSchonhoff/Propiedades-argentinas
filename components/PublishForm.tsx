@@ -73,6 +73,32 @@ export default function PublishForm() {
                 return;
             }
 
+            /* Plan limit check */
+            const { count: activeCount } = await sb
+                .from("listings")
+                .select("id", { count: "exact", head: true })
+                .eq("owner_id", user.id)
+                .eq("status", "active");
+
+            // Get user's active subscription limit
+            const { data: activeSub } = await sb
+                .from("subscriptions")
+                .select("plan_id, plans(listing_limit)")
+                .eq("user_id", user.id)
+                .eq("status", "authorized")
+                .limit(1)
+                .maybeSingle();
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const listingLimit = (activeSub as any)?.plans?.listing_limit ?? 1;
+            if ((activeCount ?? 0) >= listingLimit) {
+                setError(
+                    `Alcanzaste el límite de ${listingLimit} publicación${listingLimit !== 1 ? "es" : ""} activa${listingLimit !== 1 ? "s" : ""}. Actualizá tu plan para publicar más.`
+                );
+                setLoading(false);
+                return;
+            }
+
             /* 1. Create listing */
             const { data: listing, error: insertErr } = await sb
                 .from("listings")
