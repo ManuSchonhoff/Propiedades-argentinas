@@ -1,5 +1,7 @@
 # Propiedades Argentinas — Next.js + Supabase
 
+[![GitHub](https://img.shields.io/badge/GitHub-Repo-blue)](https://github.com/ManuSchonhoff/Propiedades-argentinas)
+
 Plataforma inmobiliaria argentina con Next.js 14 App Router, TypeScript y Supabase (Auth + Postgres + Storage).
 
 ## Quick Start
