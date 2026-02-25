@@ -1,0 +1,223 @@
+export interface Property {
+    id: number;
+    title: string;
+    location: string;
+    price: string;
+    currency: "USD" | "ARS";
+    operation: "buy" | "rent" | "temp";
+    type: "casa" | "departamento" | "ph" | "terreno" | "local" | "oficina";
+    sqm: number;
+    bedrooms: number;
+    bathrooms: number;
+    badge: string;
+    image: string;
+    images: string[];
+    description: string;
+}
+
+export const properties: Property[] = [
+    {
+        id: 1,
+        title: "Torre Alvear Puerto Madero",
+        location: "Puerto Madero, CABA",
+        price: "450,000",
+        currency: "USD",
+        operation: "buy",
+        type: "departamento",
+        sqm: 120,
+        bedrooms: 2,
+        bathrooms: 2,
+        badge: "Nuevo Ingreso",
+        image: "/images/interior.png",
+        images: ["/images/interior.png", "/images/exterior.png"],
+        description:
+            "Espectacular departamento de 120m² en Torre Alvear, Puerto Madero. Dos dormitorios en suite con vestidor, living-comedor con vista panorámica al río, cocina integrada con electrodomésticos de alta gama. Amenities de primer nivel: pileta climatizada, gimnasio, sauna, salón de eventos. Cochera y baulera incluidos.",
+    },
+    {
+        id: 2,
+        title: "Casa al Río Nordelta",
+        location: "Barrio El Yacht, Nordelta",
+        price: "890,000",
+        currency: "USD",
+        operation: "buy",
+        type: "casa",
+        sqm: 450,
+        bedrooms: 4,
+        bathrooms: 4,
+        badge: "Oportunidad",
+        image: "/images/exterior.png",
+        images: ["/images/exterior.png", "/images/interior.png"],
+        description:
+            "Imponente casa de 450m² sobre el río en el exclusivo barrio El Yacht de Nordelta. Cuatro suites, living-comedor con doble altura, cocina gourmet, estudio, sala de cine. Pileta infinita con vista al río, muelle propio, jardín parquizado. Seguridad 24hs.",
+    },
+    {
+        id: 3,
+        title: "Loft Moderno San Telmo",
+        location: "San Telmo, CABA",
+        price: "185,000",
+        currency: "USD",
+        operation: "buy",
+        type: "departamento",
+        sqm: 75,
+        bedrooms: 1,
+        bathrooms: 1,
+        badge: "Destacado",
+        image: "/images/interior.png",
+        images: ["/images/interior.png", "/images/exterior.png"],
+        description:
+            "Loft de diseño en el corazón de San Telmo. Techos altos de 4 metros, vigas de madera originales, piso de cemento alisado. Planta baja con living-cocina integrada; entrepiso con dormitorio y baño completo. Ideal para profesionales jóvenes.",
+    },
+    {
+        id: 4,
+        title: "Departamento Palermo Hollywood",
+        location: "Palermo, CABA",
+        price: "320,000",
+        currency: "USD",
+        operation: "buy",
+        type: "departamento",
+        sqm: 95,
+        bedrooms: 2,
+        bathrooms: 1,
+        badge: "Nuevo",
+        image: "/images/exterior.png",
+        images: ["/images/exterior.png", "/images/interior.png"],
+        description:
+            "Moderno dos ambientes en Palermo Hollywood. Excelente luminosidad, balcón aterrazado con parrilla, cocina americana. Edificio de categoría con pileta, solarium y SUM. A metros de Av. Juan B. Justo y transporte público.",
+    },
+    {
+        id: 5,
+        title: "Chalet Country Pilar",
+        location: "Pilará, Pilar",
+        price: "680,000",
+        currency: "USD",
+        operation: "buy",
+        type: "casa",
+        sqm: 380,
+        bedrooms: 5,
+        bathrooms: 4,
+        badge: "Premium",
+        image: "/images/exterior.png",
+        images: ["/images/exterior.png", "/images/interior.png"],
+        description:
+            "Chalet de 380m² en el country Pilará de Pilar. Cinco dormitorios, escritorio, sala de juegos, living-comedor con hogar a leña. Jardín de 1200m² con pileta y quincho. Seguridad 24hs, cancha de golf y tenis.",
+    },
+    {
+        id: 6,
+        title: "PH Reciclado Belgrano",
+        location: "Belgrano R, CABA",
+        price: "275,000",
+        currency: "USD",
+        operation: "buy",
+        type: "ph",
+        sqm: 110,
+        bedrooms: 3,
+        bathrooms: 2,
+        badge: "Reciclado",
+        image: "/images/interior.png",
+        images: ["/images/interior.png", "/images/exterior.png"],
+        description:
+            "PH reciclado a nuevo en Belgrano R. Tres dormitorios, dos baños, terraza propia de 30m². Pisos de madera, carpintería de aluminio, calefacción central. Zona residencial arbolada, a cuadras de Av. Cabildo.",
+    },
+    {
+        id: 7,
+        title: "Monoambiente Recoleta",
+        location: "Recoleta, CABA",
+        price: "350,000",
+        currency: "ARS",
+        operation: "rent",
+        type: "departamento",
+        sqm: 38,
+        bedrooms: 1,
+        bathrooms: 1,
+        badge: "Alquiler",
+        image: "/images/interior.png",
+        images: ["/images/interior.png", "/images/exterior.png"],
+        description:
+            "Luminoso monoambiente divisible en Recoleta. Cocina integrada, baño completo, balcón francés. Edificio con seguridad 24hs y laundry. Excelente ubicación a metros de la Facultad de Derecho y Plaza Francia.",
+    },
+    {
+        id: 8,
+        title: "Departamento 3 Amb Caballito",
+        location: "Caballito, CABA",
+        price: "450,000",
+        currency: "ARS",
+        operation: "rent",
+        type: "departamento",
+        sqm: 85,
+        bedrooms: 2,
+        bathrooms: 1,
+        badge: "Alquiler",
+        image: "/images/exterior.png",
+        images: ["/images/exterior.png", "/images/interior.png"],
+        description:
+            "Tres ambientes amplio en Caballito. Dos dormitorios, living-comedor, cocina separada, lavadero independiente. Piso alto con mucha luz. A cuadras del Parque Rivadavia y subte A. Ideal familia.",
+    },
+    {
+        id: 9,
+        title: "Dúplex Temporario Palermo",
+        location: "Palermo Soho, CABA",
+        price: "120",
+        currency: "USD",
+        operation: "temp",
+        type: "departamento",
+        sqm: 65,
+        bedrooms: 1,
+        bathrooms: 1,
+        badge: "Temporario",
+        image: "/images/interior.png",
+        images: ["/images/interior.png", "/images/exterior.png"],
+        description:
+            "Dúplex totalmente amoblado y equipado en la mejor zona de Palermo Soho. Planta baja con living-cocina, planta alta con dormitorio en suite. WiFi, Smart TV, ropa de cama y cocina completa. Alquiler mínimo 3 noches.",
+    },
+    {
+        id: 10,
+        title: "Estudio Temporario Microcentro",
+        location: "Microcentro, CABA",
+        price: "85",
+        currency: "USD",
+        operation: "temp",
+        type: "departamento",
+        sqm: 30,
+        bedrooms: 1,
+        bathrooms: 1,
+        badge: "Temporario",
+        image: "/images/exterior.png",
+        images: ["/images/exterior.png", "/images/interior.png"],
+        description:
+            "Estudio amoblado en pleno centro porteño. Ideal para viajeros de negocios o turistas. Kitchenette equipada, WiFi de alta velocidad, ropa blanca incluida. A pasos de Av. Corrientes y Florida.",
+    },
+    {
+        id: 11,
+        title: "Casa Quinta Tigre",
+        location: "Tigre, Buenos Aires",
+        price: "520,000",
+        currency: "USD",
+        operation: "buy",
+        type: "casa",
+        sqm: 350,
+        bedrooms: 4,
+        bathrooms: 3,
+        badge: "Exclusivo",
+        image: "/images/exterior.png",
+        images: ["/images/exterior.png", "/images/interior.png"],
+        description:
+            "Espléndida casa quinta en Tigre con acceso al río. Cuatro dormitorios, living con hogar, quincho con parrilla, pileta de natación, muelle propio. Terreno de 2000m² parquizado. Ideal como residencia permanente o casa de fin de semana.",
+    },
+    {
+        id: 12,
+        title: "Oficina Premium Catalinas",
+        location: "Catalinas, CABA",
+        price: "950,000",
+        currency: "USD",
+        operation: "buy",
+        type: "oficina",
+        sqm: 200,
+        bedrooms: 0,
+        bathrooms: 2,
+        badge: "Comercial",
+        image: "/images/interior.png",
+        images: ["/images/interior.png", "/images/exterior.png"],
+        description:
+            "Oficina de categoría AAA en el complejo Catalinas. 200m² de planta libre con vista al río. Piso técnico, aire acondicionado central, sistema de seguridad. Edificio inteligente con cocheras en subsuelo.",
+    },
+];

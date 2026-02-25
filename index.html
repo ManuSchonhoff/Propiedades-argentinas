@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propiedades Argentinas | Inicio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+
+    <!-- Navegación Clean -->
+    <nav class="clean-nav">
+        <div class="logo">PROPIEDADES ARGENTINAS</div>
+        <div class="nav-links">
+            <a href="#">Propiedades <i class="ph ph-caret-down"></i></a>
+            <a href="#">Emprendimientos <span class="tag-new">Nuevo</span></a>
+            <a href="#">Nosotros</a>
+            <a href="#">Blog</a>
+        </div>
+        <div class="cta">
+            <a href="#" class="btn-outline"><i class="ph ph-plus"></i> Publicar propiedad</a>
+        </div>
+    </nav>
+
+    <!-- Editorial Hero -->
+    <section class="editorial-hero">
+        <div class="hero-left">
+            <h1 class="display-title">Encuentra el lugar<br>al que llamarás hogar</h1>
+            <a href="#" class="btn-dark">Contactar Asesor</a>
+        </div>
+        <div class="hero-right">
+            <p class="hero-desc">Con nosotros no solo encontrarás alojamiento, sino un lugar donde comienza tu nueva
+                vida. Experiencias inmobiliarias premium en Argentina.</p>
+        </div>
+    </section>
+
+    <!-- Hero Image Banner con Buscador Central -->
+    <div class="hero-banner-container">
+        <img src="images/exterior.png" alt="Mansión Moderna" class="hero-banner">
+
+        <!-- Buscador Flotante (En primera plana) -->
+        <div class="glass-search-floater">
+            <div class="search-tabs">
+                <button class="active">Comprar</button>
+                <button>Alquilar</button>
+                <button>Temporario</button>
+            </div>
+            <div class="search-inputs">
+                <div class="input-group">
+                    <label>Ubicación</label>
+                    <div class="select-wrapper">
+                        <span>Buenos Aires, Todo el país</span>
+                        <i class="ph ph-caret-down"></i>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="input-group">
+                    <label>Tipo de Propiedad</label>
+                    <div class="select-wrapper">
+                        <span>Casa / Depto</span>
+                        <i class="ph ph-caret-down"></i>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="input-group">
+                    <label>Rango de Precio</label>
+                    <div class="select-wrapper">
+                        <span>Indistinto</span>
+                        <i class="ph ph-caret-down"></i>
+                    </div>
+                </div>
+                <button class="btn-search-dark">Buscar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Editorial Content Section -->
+    <section class="content-section">
+        <div class="text-block centered">
+            <h2>Selección Exclusiva</h2>
+            <p>Nuestros proyectos tratan sobre armonía, estilo y calidad de vida.</p>
+        </div>
+
+        <!-- Property Grid -->
+        <div class="prop-grid-styled">
+            <!-- Card 1 -->
+            <article class="prop-card-minimal">
+                <div class="img-wrapper">
+                    <img src="images/interior.png" alt="Interior">
+                    <div class="card-badge">Nuevo Ingreso</div>
+                </div>
+                <div class="card-info">
+                    <div class="card-top">
+                        <h3>Torre Alvear Puerto Madero</h3>
+                        <span class="price">USD 450,000</span>
+                    </div>
+                    <p class="card-sub">Puerto Madero, CABA</p>
+                    <div class="card-meta">
+                        <span><i class="ph ph-ruler"></i> 120m²</span>
+                        <span><i class="ph ph-bed"></i> 2 Dorm.</span>
+                        <span><i class="ph ph-shower"></i> 2 Baños</span>
+                    </div>
+                    <button class="btn-check">Ver Detalles</button>
+                </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="prop-card-minimal">
+                <div class="img-wrapper">
+                    <img src="images/exterior.png" alt="Exterior">
+                    <div class="card-badge">Oportunidad</div>
+                </div>
+                <div class="card-info">
+                    <div class="card-top">
+                        <h3>Casa al Río Nordelta</h3>
+                        <span class="price">USD 890,000</span>
+                    </div>
+                    <p class="card-sub">Barrio El Yacht, Nordelta</p>
+                    <div class="card-meta">
+                        <span><i class="ph ph-ruler"></i> 450m²</span>
+                        <span><i class="ph ph-bed"></i> 4 Dorm.</span>
+                        <span><i class="ph ph-shower"></i> 4 Baños</span>
+                    </div>
+                    <button class="btn-check">Ver Detalles</button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
