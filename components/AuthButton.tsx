@@ -73,7 +73,7 @@ export default function AuthButton() {
     }
 
     return (
-        <Link href="/login" className="btn-cta">
+        <Link href="/login" className="btn-publish">
             Ingresar
         </Link>
     );

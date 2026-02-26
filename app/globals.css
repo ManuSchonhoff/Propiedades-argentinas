@@ -32,11 +32,13 @@ body {
 }
 
 .logo {
-    font-family: var(--font-ui);
+    font-family: var(--font-display);
     font-weight: 800;
     font-size: 1.2rem;
     letter-spacing: -0.5px;
     text-transform: uppercase;
+    color: var(--text-primary);
+    text-decoration: none;
 }
 
 .nav-links {
@@ -1641,6 +1643,50 @@ body {
     opacity: 1;
 }
 
+/* ====== Nav Toggle (Hamburger) ====== */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1002;
+}
+
+.nav-toggle-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.nav-toggle-bar.open:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle-bar.open:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle-bar.open:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ====== Mobile Menu (default: transparent wrapper) ====== */
+.mobile-menu {
+    display: contents;
+}
+
+.mobile-menu-overlay {
+    display: none;
+}
+
 /* ====== Responsive ====== */
 @media (max-width: 1024px) {
     .editorial-hero {
@@ -1741,6 +1787,73 @@ body {
     .lightbox-arrow {
         width: 40px;
         height: 40px;
+    }
+}
+
+/* ====== Responsive — 900px (hamburger trigger) ====== */
+@media (max-width: 900px) {
+    .nav-toggle {
+        display: flex;
+    }
+
+    .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        max-width: 85vw;
+        height: 100dvh;
+        background: #fff;
+        z-index: 1001;
+        padding: 5rem 2rem 2rem;
+        gap: 2rem;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.08);
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+    }
+
+    .mobile-menu.open {
+        right: 0;
+    }
+
+    .mobile-menu .nav-links {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .mobile-menu .nav-links a {
+        padding: 0.9rem 0;
+        font-size: 1.05rem;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .mobile-menu .nav-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .mobile-menu .nav-actions .btn-publish {
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
+    .mobile-menu-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .mobile-menu-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
     }
 }
 
@@ -1888,13 +2001,14 @@ body {
     transition: all 0.2s;
 }
 
-.btn-outline {
+/* btn-outline for pricing CTA — extends base .btn-outline */
+.pricing-card__cta.btn-outline {
     background: transparent;
     border: 2px solid var(--accent-dark);
     color: var(--accent-dark);
 }
 
-.btn-outline:hover {
+.pricing-card__cta.btn-outline:hover {
     background: var(--accent-dark);
     color: #fff;
 }
@@ -2141,8 +2255,87 @@ body {
     letter-spacing: 0.3px;
 }
 
-/* ====== Responsive — pricing/billing/boost ====== */
+/* ====== Responsive — 768px (general mobile) ====== */
 @media (max-width: 768px) {
+    .clean-nav {
+        padding: 1.2rem 1.5rem;
+    }
+
+    .display-title {
+        font-size: 2.8rem;
+    }
+
+    .hero-banner {
+        height: 40vh;
+    }
+
+    .content-section {
+        padding: 2rem 1rem;
+    }
+
+    .text-block h2 {
+        font-size: 2rem;
+    }
+
+    .detail-container {
+        padding: 1rem 1.5rem;
+    }
+
+    .detail-title {
+        font-size: 2rem;
+    }
+
+    .detail-price {
+        font-size: 1.5rem;
+    }
+
+    .detail-features {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .publish-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .dash-header {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+    }
+
+    .dash-listing-row {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .dash-listing-thumb {
+        width: 100%;
+        height: 140px;
+    }
+
+    .dash-listing-actions {
+        justify-content: center;
+    }
+
+    .wizard-progress {
+        gap: 1.5rem;
+    }
+
+    .wizard-step span {
+        font-size: 0.7rem;
+    }
+
+    /* Pricing */
     .pricing-page {
         padding: 6rem 1rem 3rem;
     }
@@ -2163,6 +2356,7 @@ body {
         transform: translateY(-4px);
     }
 
+    /* Billing */
     .billing-page {
         padding: 6rem 1rem 3rem;
     }
@@ -2171,5 +2365,95 @@ body {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
+    }
+}
+
+/* ====== Responsive — 480px (extra-small) ====== */
+@media (max-width: 480px) {
+    .clean-nav {
+        padding: 1rem;
+    }
+
+    .logo {
+        font-size: 0.9rem;
+    }
+
+    .display-title {
+        font-size: 2rem;
+        letter-spacing: -1px;
+    }
+
+    .hero-desc {
+        font-size: 0.95rem;
+    }
+
+    .hero-banner {
+        height: 35vh;
+        border-radius: 12px;
+    }
+
+    .hero-banner-container {
+        padding: 0 1rem;
+    }
+
+    .glass-search-floater {
+        padding: 1rem;
+    }
+
+    .content-section {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .text-block h2 {
+        font-size: 1.6rem;
+    }
+
+    .detail-container {
+        padding: 1rem;
+    }
+
+    .detail-title {
+        font-size: 1.6rem;
+    }
+
+    .detail-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+    }
+
+    .detail-features .feat {
+        padding: 0.75rem;
+        border: 1px solid #f0f0f0;
+        border-radius: 8px;
+    }
+
+    .card-top h3 {
+        font-size: 1.1rem;
+    }
+
+    .price {
+        font-size: 1rem;
+    }
+
+    .footer-inner {
+        padding: 1.5rem 1rem;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .footer-bottom {
+        padding: 1rem;
+    }
+
+    .auth-card {
+        padding: 1.5rem;
+    }
+
+    .auth-card h1 {
+        font-size: 1.5rem;
     }
 }
