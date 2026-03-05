@@ -5,8 +5,8 @@ import { supabase } from "@/lib/supabase/server";
 import { toPropertyView } from "@/lib/supabase/types";
 import { opLabels, getBaseUrl } from "@/lib/seo";
 import type { ListingRow, ListingMediaRow } from "@/lib/supabase/types";
-import { AnimatedHero } from "@/components/ui/animated-hero";
-import { ContainerScroll } from "@/components/ui/container-scroll";
+import HeroSection from "./HeroSection";
+import ScrollPreview from "./ScrollPreview";
 
 export const revalidate = 300;
 
@@ -45,7 +45,7 @@ interface Props {
 
 export default async function PropiedadesPage({ searchParams }: Props) {
     const params = await searchParams;
-    const op = params.op || ""; // empty = ALL
+    const op = params.op || "";
     const loc = params.loc || "";
     const type = params.type || "";
     const priceMax = params.price ? parseInt(params.price, 10) : 0;
@@ -56,7 +56,6 @@ export default async function PropiedadesPage({ searchParams }: Props) {
     if (db) {
         let query = db.from("listings").select("*").eq("status", "active");
 
-        // Only filter by op if explicitly set
         if (op && op !== "all") {
             query = query.eq("op", op);
         }
@@ -117,39 +116,19 @@ export default async function PropiedadesPage({ searchParams }: Props) {
 
     const opLabel = op ? (opLabels[op] ?? "Venta") : "";
 
+    // Serialize properties for client components
+    const previewImages = properties.slice(0, 4).map(p => ({ id: p.id, image: p.image, title: p.title }));
+
     return (
         <>
             <Navbar />
 
-            {/* Animated Hero */}
-            <AnimatedHero
-                title="Encontrá tu próximo"
-                rotatingWords={["hogar", "departamento", "lugar", "espacio"]}
-                subtitle="La plataforma inmobiliaria de Argentina. Venta, alquiler y temporario."
-            />
+            {/* Animated Hero with rotating words */}
+            <HeroSection />
 
             {/* Container Scroll Preview */}
-            {properties.length > 0 && (
-                <ContainerScroll
-                    titleComponent={
-                        <p className="text-sm uppercase tracking-widest text-[var(--text-secondary)] font-medium">
-                            {properties.length} propiedades disponibles
-                        </p>
-                    }
-                >
-                    <div className="grid grid-cols-2 gap-0.5 p-1 bg-neutral-100 rounded-xl overflow-hidden">
-                        {properties.slice(0, 4).map((p) => (
-                            <div key={p.id} className="aspect-[16/10] relative overflow-hidden">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={p.image}
-                                    alt={p.title}
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </ContainerScroll>
+            {previewImages.length > 0 && (
+                <ScrollPreview images={previewImages} count={properties.length} />
             )}
 
             {/* Listings */}

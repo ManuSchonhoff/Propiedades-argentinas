@@ -1,51 +1,72 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import { cn } from "@/lib/utils";
+import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
 
-interface AnimatedHeroProps {
+interface HeroProps {
     title: string;
-    rotatingWords: string[];
+    words: string[];
     subtitle?: string;
-    className?: string;
 }
 
-export function AnimatedHero({ title, rotatingWords, subtitle, className }: AnimatedHeroProps) {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isVisible, setIsVisible] = useState(true);
-
-    const rotate = useCallback(() => {
-        setIsVisible(false);
-        setTimeout(() => {
-            setCurrentIndex((prev) => (prev + 1) % rotatingWords.length);
-            setIsVisible(true);
-        }, 300);
-    }, [rotatingWords.length]);
+function Hero({ title, words, subtitle }: HeroProps) {
+    const [titleNumber, setTitleNumber] = useState(0);
+    const titles = useMemo(() => words, [words]);
 
     useEffect(() => {
-        const interval = setInterval(rotate, 3000);
-        return () => clearInterval(interval);
-    }, [rotate]);
+        const timeoutId = setTimeout(() => {
+            if (titleNumber === titles.length - 1) {
+                setTitleNumber(0);
+            } else {
+                setTitleNumber(titleNumber + 1);
+            }
+        }, 2000);
+        return () => clearTimeout(timeoutId);
+    }, [titleNumber, titles]);
 
     return (
-        <div className={cn("text-center py-12 px-4", className)}>
-            <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight text-[var(--text-primary)] font-[var(--font-display)]"
-                style={{ fontFamily: "var(--font-display)", letterSpacing: "-1.5px" }}>
-                {title}{" "}
-                <span
-                    className={cn(
-                        "inline-block transition-all duration-300 bg-gradient-to-r from-neutral-900 to-neutral-600 bg-clip-text text-transparent",
-                        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-                    )}
-                >
-                    {rotatingWords[currentIndex]}
-                </span>
-            </h1>
-            {subtitle && (
-                <p className="mt-4 text-lg text-[var(--text-secondary)] max-w-xl mx-auto">
-                    {subtitle}
-                </p>
-            )}
+        <div className="w-full">
+            <div className="container mx-auto">
+                <div className="flex gap-8 py-20 lg:py-28 items-center justify-center flex-col">
+                    <div className="flex gap-4 flex-col">
+                        <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
+                            <span>{title}</span>
+                            <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
+                                &nbsp;
+                                {titles.map((word, index) => (
+                                    <motion.span
+                                        key={index}
+                                        className="absolute font-semibold"
+                                        initial={{ opacity: 0, y: "-100" }}
+                                        transition={{ type: "spring", stiffness: 50 }}
+                                        animate={
+                                            titleNumber === index
+                                                ? {
+                                                    y: 0,
+                                                    opacity: 1,
+                                                }
+                                                : {
+                                                    y: titleNumber > index ? -150 : 150,
+                                                    opacity: 0,
+                                                }
+                                        }
+                                    >
+                                        {word}
+                                    </motion.span>
+                                ))}
+                            </span>
+                        </h1>
+
+                        {subtitle && (
+                            <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center mx-auto">
+                                {subtitle}
+                            </p>
+                        )}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
+
+export { Hero };
