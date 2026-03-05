@@ -1,10 +1,39 @@
+import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import PropertyCard from "@/components/PropertyCard";
 import { supabase } from "@/lib/supabase/server";
 import { toPropertyView } from "@/lib/supabase/types";
+import { opLabels, getBaseUrl } from "@/lib/seo";
 import type { ListingRow, ListingMediaRow } from "@/lib/supabase/types";
 
-export const revalidate = 30;
+export const revalidate = 300;
+
+interface SearchParamsType {
+    op?: string;
+    loc?: string;
+    type?: string;
+    price?: string;
+}
+
+export async function generateMetadata({ searchParams }: { searchParams: Promise<SearchParamsType> }): Promise<Metadata> {
+    const params = await searchParams;
+    const op = params.op || "buy";
+    const loc = params.loc || "";
+    const opLabel = opLabels[op] ?? "Venta";
+    const title = loc
+        ? `Propiedades en ${opLabel} en ${loc} | Propiedades Argentinas`
+        : `Propiedades en ${opLabel} | Propiedades Argentinas`;
+    const description = loc
+        ? `Encontrá propiedades en ${opLabel.toLowerCase()} en ${loc}. Departamentos, casas y más.`
+        : `Explorá propiedades en ${opLabel.toLowerCase()} en Argentina.`;
+
+    return {
+        title,
+        description,
+        alternates: { canonical: `${getBaseUrl()}/propiedades` },
+        openGraph: { title, description, siteName: "Propiedades Argentinas", type: "website", locale: "es_AR" },
+    };
+}
 
 interface Props {
     searchParams: Promise<{
@@ -84,11 +113,7 @@ export default async function PropiedadesPage({ searchParams }: Props) {
         }
     }
 
-    const opLabels: Record<string, string> = {
-        buy: "Venta",
-        rent: "Alquiler",
-        temp: "Temporario",
-    };
+    // opLabels imported from lib/seo
 
     return (
         <>
