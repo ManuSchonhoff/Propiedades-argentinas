@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 interface Plan {
     id: string;
@@ -67,37 +68,38 @@ export default function PricingCards({ plans }: { plans: Plan[] }) {
             {success && <p className="pricing-success">{success}</p>}
             <div className="pricing-grid">
                 {plans.map((plan, i) => (
-                    <div
-                        key={plan.id}
-                        className={`pricing-card ${i === 1 ? "pricing-card--popular" : ""}`}
-                    >
-                        {i === 1 && <span className="pricing-badge">Más popular</span>}
-                        <h3 className="pricing-card__name">{plan.name}</h3>
-                        <div className="pricing-card__price">
-                            <span className="pricing-card__amount">{formatPrice(plan.price_ars)}</span>
-                            <span className="pricing-card__period">/mes</span>
+                    <GlowingEffect key={plan.id}>
+                        <div
+                            className={`pricing-card ${i === 1 ? "pricing-card--popular" : ""}`}
+                        >
+                            {i === 1 && <span className="pricing-badge">Más popular</span>}
+                            <h3 className="pricing-card__name">{plan.name}</h3>
+                            <div className="pricing-card__price">
+                                <span className="pricing-card__amount">{formatPrice(plan.price_ars)}</span>
+                                <span className="pricing-card__period">/mes</span>
+                            </div>
+                            <ul className="pricing-card__features">
+                                {(features[plan.code] ?? [`${plan.listing_limit} publicaciones activas`]).map((f, j) => (
+                                    <li key={j}>✓ {f}</li>
+                                ))}
+                            </ul>
+                            <button
+                                className={`pricing-card__cta ${i === 1 ? "btn-cta" : "btn-outline"}`}
+                                onClick={() => handleRequest(plan.id, plan.name)}
+                                disabled={loading !== null}
+                            >
+                                {loading === plan.id ? "Procesando..." : "Solicitar activación"}
+                            </button>
+                            <a
+                                href={whatsappLink(plan)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="pricing-card__wa"
+                            >
+                                💬 Hablar por WhatsApp
+                            </a>
                         </div>
-                        <ul className="pricing-card__features">
-                            {(features[plan.code] ?? [`${plan.listing_limit} publicaciones activas`]).map((f, j) => (
-                                <li key={j}>✓ {f}</li>
-                            ))}
-                        </ul>
-                        <button
-                            className={`pricing-card__cta ${i === 1 ? "btn-cta" : "btn-outline"}`}
-                            onClick={() => handleRequest(plan.id, plan.name)}
-                            disabled={loading !== null}
-                        >
-                            {loading === plan.id ? "Procesando..." : "Solicitar activación"}
-                        </button>
-                        <a
-                            href={whatsappLink(plan)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="pricing-card__wa"
-                        >
-                            💬 Hablar por WhatsApp
-                        </a>
-                    </div>
+                    </GlowingEffect>
                 ))}
             </div>
         </>

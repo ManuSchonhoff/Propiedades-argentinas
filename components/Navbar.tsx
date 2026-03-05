@@ -78,6 +78,7 @@ export default function Navbar() {
                         Explorar <span className="nav-tag">Reel</span>
                     </Link>
                     <Link href="/nosotros">Nosotros</Link>
+                    <Link href="/ia">IA <span className="tag-new">New</span></Link>
                     <Link href="/pricing">Planes</Link>
                 </div>
                 <div className="nav-actions">
