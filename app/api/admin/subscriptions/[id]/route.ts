@@ -45,10 +45,10 @@ export async function PATCH(
         return NextResponse.json({ error: "Service role not configured" }, { status: 500 });
     }
 
-    const updateData: Record<string, unknown> = { status };
-    if (status === "authorized") {
-        updateData.started_at = new Date().toISOString();
-    }
+    const updateData: Record<string, unknown> = {
+        status,
+        updated_at: new Date().toISOString(),
+    };
 
     const { data: sub, error: updateErr } = await admin
         .from("subscriptions")

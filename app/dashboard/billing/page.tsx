@@ -16,7 +16,7 @@ export default async function BillingPage() {
     // Get active or pending subscription
     const { data: sub } = await sb
         .from("subscriptions")
-        .select("id, status, started_at, ends_at, plan_id, plans(code, name, price_ars, listing_limit)")
+        .select("id, status, created_at, updated_at, plan_id, plans(code, name, price_ars, listing_limit)")
         .eq("user_id", user.id)
         .in("status", ["authorized", "manual_pending", "paused"])
         .order("created_at", { ascending: false })
