@@ -36,7 +36,7 @@ export async function middleware(request: NextRequest) {
     // Protected routes → redirect to /login
     if (
         !user &&
-        (path.startsWith("/dashboard") || path.startsWith("/publicar"))
+        (path.startsWith("/dashboard") || path.startsWith("/publicar") || path.startsWith("/admin"))
     ) {
         const loginUrl = request.nextUrl.clone();
         loginUrl.pathname = "/login";
@@ -58,5 +58,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/dashboard/:path*", "/publicar/:path*", "/login", "/registro"],
+    matcher: ["/dashboard/:path*", "/publicar/:path*", "/admin/:path*", "/login", "/registro"],
 };

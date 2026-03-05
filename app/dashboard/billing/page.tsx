@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase/server";
+import { supabaseAuth } from "@/lib/supabase/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
@@ -6,25 +6,25 @@ export const metadata = {
     title: "Mi Plan — Dashboard",
 };
 
-export default async function BillingPage() {
-    const db = supabase();
-    if (!db) return redirect("/login");
+const WA_NUMBER = "5491100000000"; // TODO: Replace with real WhatsApp number
 
-    const { data: { user } } = await db.auth.getUser();
+export default async function BillingPage() {
+    const sb = await supabaseAuth();
+    const { data: { user } } = await sb.auth.getUser();
     if (!user) return redirect("/login");
 
-    // Get active subscription
-    const { data: sub } = await db
+    // Get active or pending subscription
+    const { data: sub } = await sb
         .from("subscriptions")
-        .select("id, status, current_period_end, plan_id, plans(code, name, price_ars, listing_limit)")
+        .select("id, status, started_at, ends_at, plan_id, plans(code, name, price_ars, listing_limit)")
         .eq("user_id", user.id)
-        .in("status", ["authorized", "pending", "paused"])
+        .in("status", ["authorized", "manual_pending", "paused"])
         .order("created_at", { ascending: false })
         .limit(1)
         .maybeSingle();
 
     // Count active listings
-    const { count: activeListings } = await db
+    const { count: activeListings } = await sb
         .from("listings")
         .select("id", { count: "exact", head: true })
         .eq("owner_id", user.id)
@@ -39,11 +39,16 @@ export default async function BillingPage() {
 
     const statusLabels: Record<string, string> = {
         authorized: "✅ Activa",
-        pending: "⏳ Pendiente",
+        manual_pending: "⏳ Pendiente de aprobación",
         paused: "⏸️ Pausada",
         cancelled: "❌ Cancelada",
         expired: "⌛ Expirada",
+        pending: "⏳ Pendiente",
     };
+
+    const waLink = plan
+        ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hola! Solicité el ${plan.name} y estoy esperando aprobación. Mi email: ${user.email}`)}`
+        : `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hola! Quiero información sobre los planes de Propiedades Argentinas.")}`;
 
     return (
         <main className="billing-page">
@@ -67,17 +72,20 @@ export default async function BillingPage() {
                         </div>
                         <div className="billing-detail">
                             <span className="billing-label">Publicaciones</span>
-                            <span className="billing-value">{activeListings ?? 0} / {listingLimit}</span>
+                            <span className="billing-value">
+                                {activeListings ?? 0} / {sub.status === "authorized" ? listingLimit : 1}
+                            </span>
                         </div>
-                        {sub.current_period_end && (
-                            <div className="billing-detail">
-                                <span className="billing-label">Próximo cobro</span>
-                                <span className="billing-value">
-                                    {new Date(sub.current_period_end).toLocaleDateString("es-AR")}
-                                </span>
-                            </div>
-                        )}
                     </div>
+
+                    {sub.status === "manual_pending" && (
+                        <div className="billing-pending-notice">
+                            <p>Tu solicitud está siendo revisada por un administrador.</p>
+                            <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-cta btn-wa">
+                                💬 Consultar por WhatsApp
+                            </a>
+                        </div>
+                    )}
                 </div>
             ) : (
                 <div className="billing-card billing-card--empty">
@@ -90,7 +98,12 @@ export default async function BillingPage() {
                         <span className="billing-label">Publicaciones</span>
                         <span className="billing-value">{activeListings ?? 0} / 1</span>
                     </div>
-                    <Link href="/pricing" className="btn-cta">Ver Planes</Link>
+                    <div className="billing-actions-row">
+                        <Link href="/pricing" className="btn-cta">Ver Planes</Link>
+                        <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-outline">
+                            💬 WhatsApp
+                        </a>
+                    </div>
                 </div>
             )}
 

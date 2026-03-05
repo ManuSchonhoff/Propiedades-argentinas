@@ -10,9 +10,12 @@ interface Plan {
     listing_limit: number;
 }
 
+const WA_NUMBER = "5491100000000"; // TODO: Replace with real WhatsApp number
+
 export default function PricingCards({ plans }: { plans: Plan[] }) {
     const [loading, setLoading] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
 
     const features: Record<string, string[]> = {
         S: ["5 publicaciones activas", "Soporte por email", "Panel de gestión"],
@@ -20,11 +23,12 @@ export default function PricingCards({ plans }: { plans: Plan[] }) {
         L: ["100 publicaciones activas", "Soporte dedicado", "Estadísticas avanzadas", "Panel de gestión", "Destacados incluidos"],
     };
 
-    const handleSubscribe = async (planId: string) => {
+    const handleRequest = async (planId: string, planName: string) => {
         setLoading(planId);
         setError(null);
+        setSuccess(null);
         try {
-            const res = await fetch("/api/billing/subscribe", {
+            const res = await fetch("/api/billing/request-subscription", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ plan_id: planId }),
@@ -34,15 +38,19 @@ export default function PricingCards({ plans }: { plans: Plan[] }) {
                 setError(data.error ?? "Error al procesar");
                 return;
             }
-            // Redirect to MercadoPago
-            if (data.init_point) {
-                window.location.href = data.init_point;
-            }
+            setSuccess(`✅ Solicitud de ${planName} enviada. Un administrador la aprobará pronto.`);
         } catch {
             setError("Error de conexión");
         } finally {
             setLoading(null);
         }
+    };
+
+    const whatsappLink = (plan: Plan) => {
+        const msg = encodeURIComponent(
+            `Hola! Quiero activar el ${plan.name} ($${plan.price_ars.toLocaleString("es-AR")}/mes) en Propiedades Argentinas.`
+        );
+        return `https://wa.me/${WA_NUMBER}?text=${msg}`;
     };
 
     const formatPrice = (price: number) => {
@@ -56,6 +64,7 @@ export default function PricingCards({ plans }: { plans: Plan[] }) {
     return (
         <>
             {error && <p className="pricing-error">{error}</p>}
+            {success && <p className="pricing-success">{success}</p>}
             <div className="pricing-grid">
                 {plans.map((plan, i) => (
                     <div
@@ -75,11 +84,19 @@ export default function PricingCards({ plans }: { plans: Plan[] }) {
                         </ul>
                         <button
                             className={`pricing-card__cta ${i === 1 ? "btn-cta" : "btn-outline"}`}
-                            onClick={() => handleSubscribe(plan.id)}
+                            onClick={() => handleRequest(plan.id, plan.name)}
                             disabled={loading !== null}
                         >
-                            {loading === plan.id ? "Procesando..." : "Suscribirme"}
+                            {loading === plan.id ? "Procesando..." : "Solicitar activación"}
                         </button>
+                        <a
+                            href={whatsappLink(plan)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="pricing-card__wa"
+                        >
+                            💬 Hablar por WhatsApp
+                        </a>
                     </div>
                 ))}
             </div>

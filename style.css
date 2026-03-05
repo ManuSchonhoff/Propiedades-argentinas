@@ -409,3 +409,265 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================
+   Pricing — Success & WhatsApp
+   ============================ */
+.pricing-success {
+    text-align: center;
+    color: #16a34a;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f0fdf4;
+    border-radius: 8px;
+}
+
+.pricing-error {
+    text-align: center;
+    color: #dc2626;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #fef2f2;
+    border-radius: 8px;
+}
+
+.pricing-card__wa {
+    display: block;
+    text-align: center;
+    margin-top: 0.75rem;
+    color: #25d366;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.pricing-card__wa:hover {
+    opacity: 0.8;
+}
+
+/* ============================
+   Boost — Success & WhatsApp
+   ============================ */
+.boost-success {
+    color: #16a34a;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.boost-option-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.boost-option-row .boost-option {
+    flex: 1;
+}
+
+.boost-wa-link {
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.boost-wa-link:hover {
+    background: #f0f0f0;
+}
+
+/* ============================
+   Billing — Pending Notice
+   ============================ */
+.billing-pending-notice {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.billing-pending-notice p {
+    color: #92400e;
+    margin-bottom: 1rem;
+}
+
+.btn-wa {
+    background: #25d366;
+    border-color: #25d366;
+    color: white;
+}
+
+.btn-wa:hover {
+    background: #22c55e;
+}
+
+.billing-actions-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+}
+
+/* ============================
+   Admin Panel
+   ============================ */
+.admin-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 4rem;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.admin-header h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.admin-empty {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 3rem 0;
+}
+
+.admin-table-wrapper {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.admin-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid #f0f0f0;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.admin-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: middle;
+}
+
+.admin-row--pending {
+    background: #fffbeb;
+}
+
+.admin-cell-user {
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.admin-cell-listing {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-status {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.admin-status--manual_pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.admin-status--authorized,
+.admin-status--active {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.admin-status--paused {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.admin-status--cancelled,
+.admin-status--expired {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-admin {
+    padding: 0.35rem 0.75rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: white;
+    transition: all 0.2s;
+    font-family: var(--font-ui);
+}
+
+.btn-admin:hover {
+    border-color: #999;
+}
+
+.btn-admin:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-admin--approve {
+    border-color: #16a34a;
+    color: #16a34a;
+}
+
+.btn-admin--approve:hover {
+    background: #f0fdf4;
+}
+
+.btn-admin--pause {
+    border-color: #d97706;
+    color: #d97706;
+}
+
+.btn-admin--pause:hover {
+    background: #fffbeb;
+}
+
+.btn-admin--cancel {
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+.btn-admin--cancel:hover {
+    background: #fef2f2;
+}
+
+.admin-no-actions {
+    color: var(--text-secondary);
+}
