@@ -26,29 +26,32 @@ function Hero({ title, words, subtitle }: HeroProps) {
 
     return (
         <div className="w-full">
-            <div className="container mx-auto">
-                <div className="flex gap-8 py-20 lg:py-28 items-center justify-center flex-col">
-                    <div className="flex gap-4 flex-col">
-                        <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
+            <div className="site-container">
+                <div style={{ display: "flex", gap: "1rem", padding: "3rem 0 1.5rem", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+                    <div style={{ display: "flex", gap: "0.5rem", flexDirection: "column" }}>
+                        <h1 style={{
+                            fontFamily: "var(--font-display)",
+                            fontWeight: 700,
+                            fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                            letterSpacing: "-1.5px",
+                            textAlign: "center",
+                            lineHeight: 1.1,
+                            maxWidth: "600px",
+                            margin: "0 auto",
+                        }}>
                             <span>{title}</span>
-                            <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
+                            <span style={{ position: "relative", display: "flex", width: "100%", justifyContent: "center", overflow: "hidden", textAlign: "center", paddingBottom: "0.25rem", paddingTop: "0.15rem", minHeight: "1.3em" }}>
                                 &nbsp;
                                 {titles.map((word, index) => (
                                     <motion.span
                                         key={index}
-                                        className="absolute font-semibold"
+                                        style={{ position: "absolute", fontWeight: 600 }}
                                         initial={{ opacity: 0, y: "-100" }}
                                         transition={{ type: "spring", stiffness: 50 }}
                                         animate={
                                             titleNumber === index
-                                                ? {
-                                                    y: 0,
-                                                    opacity: 1,
-                                                }
-                                                : {
-                                                    y: titleNumber > index ? -150 : 150,
-                                                    opacity: 0,
-                                                }
+                                                ? { y: 0, opacity: 1 }
+                                                : { y: titleNumber > index ? -150 : 150, opacity: 0 }
                                         }
                                     >
                                         {word}
@@ -58,7 +61,14 @@ function Hero({ title, words, subtitle }: HeroProps) {
                         </h1>
 
                         {subtitle && (
-                            <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center mx-auto">
+                            <p style={{
+                                fontSize: "1rem",
+                                lineHeight: 1.6,
+                                color: "var(--text-secondary)",
+                                maxWidth: "500px",
+                                textAlign: "center",
+                                margin: "0 auto",
+                            }}>
                                 {subtitle}
                             </p>
                         )}

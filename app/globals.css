@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+/* ============================
+   Tailwind layer overrides — prevent TW base from
+   conflicting with existing CSS (link colors, borders, etc.)
+   ============================ */
+@layer base {
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    img,
+    video {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
 :root {
     --bg-color: #ffffff;
     --text-primary: #121212;
@@ -7,6 +24,8 @@
     --accent-dark: #000000;
     --font-ui: 'Inter', sans-serif;
     --font-display: 'Space Grotesk', sans-serif;
+    --site-max: 1200px;
+    --site-px: 2rem;
 }
 
 * {
@@ -21,6 +40,50 @@ body {
     color: var(--text-primary);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+}
+
+/* ============================
+   Global link reset
+   ============================ */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.text-link {
+    color: var(--accent-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* ============================
+   Site container — consistent max-width everywhere
+   ============================ */
+.site-container {
+    max-width: var(--site-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--site-px);
+    padding-right: var(--site-px);
+    width: 100%;
+}
+
+/* ============================
+   Tag badges
+   ============================ */
+.tag-new {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--accent-dark);
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+    line-height: 1;
 }
 
 /* Navbar Clean */
@@ -2743,4 +2806,58 @@ body {
 .btn-sm {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
+}
+
+/* ============================
+   /ia Page
+   ============================ */
+.ia-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.ia-feature-card {
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #e5e5e5;
+    transition: border-color 0.2s;
+}
+
+.ia-feature-card:hover {
+    border-color: #a3a3a3;
+}
+
+.ia-spline-container {
+    flex: 1;
+    position: relative;
+}
+
+/* ============================
+   Responsive overrides
+   ============================ */
+@media (max-width: 768px) {
+    :root {
+        --site-px: 1.25rem;
+    }
+
+    .ia-features-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .ia-spline-container {
+        display: none;
+    }
+
+    .ia-feature-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --site-px: 1rem;
+    }
 }

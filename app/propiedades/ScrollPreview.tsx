@@ -10,31 +10,38 @@ interface ScrollPreviewProps {
 
 export default function ScrollPreview({ images, count }: ScrollPreviewProps) {
     return (
-        <div className="flex flex-col overflow-hidden">
-            <ContainerScroll
-                titleComponent={
-                    <h2 className="text-4xl font-semibold" style={{ fontFamily: "var(--font-display)" }}>
-                        Explorá nuestras <br />
-                        <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
-                            {count} propiedades
-                        </span>
-                    </h2>
-                }
-            >
-                <div className="grid grid-cols-2 gap-1 h-full w-full">
-                    {images.map((img) => (
-                        <div key={img.id} className="relative overflow-hidden">
-                            <Image
-                                src={img.image}
-                                alt={img.title}
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 50vw, 25vw"
-                            />
-                        </div>
-                    ))}
-                </div>
-            </ContainerScroll>
-        </div>
+        <ContainerScroll
+            titleComponent={
+                <h2 style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 600,
+                    fontSize: "clamp(1.5rem, 3vw, 2rem)",
+                    letterSpacing: "-0.5px",
+                }}>
+                    Explorá nuestras{" "}
+                    <strong style={{ fontWeight: 700 }}>{count} propiedades</strong>
+                </h2>
+            }
+        >
+            <div style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "2px",
+                height: "100%",
+                width: "100%",
+            }}>
+                {images.map((img) => (
+                    <div key={img.id} style={{ position: "relative", overflow: "hidden" }}>
+                        <Image
+                            src={img.image}
+                            alt={img.title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 50vw, 25vw"
+                        />
+                    </div>
+                ))}
+            </div>
+        </ContainerScroll>
     );
 }

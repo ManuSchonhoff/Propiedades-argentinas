@@ -71,9 +71,7 @@ export default function Navbar() {
             {/* Mobile drawer / desktop inline */}
             <div className={`mobile-menu${menuOpen ? " open" : ""}`}>
                 <div className="nav-links">
-                    <Link href="/propiedades?op=buy">
-                        Propiedades <i className="ph ph-caret-down"></i>
-                    </Link>
+                    <Link href="/propiedades">Propiedades</Link>
                     <Link href="/explorar">
                         Explorar <span className="nav-tag">Reel</span>
                     </Link>
