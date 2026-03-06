@@ -19,24 +19,13 @@ export default function IAContent() {
     return (
         <main className="site-container" style={{ paddingTop: "3rem", paddingBottom: "4rem" }}>
             {/* Hero with Spline */}
-            <div style={{
-                width: "100%",
-                height: "420px",
-                background: "rgba(0,0,0,0.96)",
-                borderRadius: "20px",
-                overflow: "hidden",
-                position: "relative",
-                marginBottom: "3rem",
-                border: "1px solid #333",
-            }}>
+            <div className="ia-hero-banner">
                 <Spotlight
                     className="-top-40 left-0 md:left-60 md:-top-20"
                     fill="white"
                 />
-
                 <div style={{ display: "flex", height: "100%" }}>
-                    {/* Left */}
-                    <div style={{ flex: 1, padding: "2.5rem", position: "relative", zIndex: 10, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                    <div className="ia-hero-text">
                         <h1 style={{
                             fontFamily: "var(--font-display)",
                             fontWeight: 700,
@@ -54,8 +43,6 @@ export default function IAContent() {
                             personalizadas y explorar con un asistente inteligente.
                         </p>
                     </div>
-
-                    {/* Right — Spline 3D (desktop only) */}
                     <div className="ia-spline-container">
                         <SplineScene
                             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
@@ -65,55 +52,37 @@ export default function IAContent() {
                 </div>
             </div>
 
-            {/* Features Grid */}
+            {/* Features Grid — normalized to site design */}
             <div className="ia-features-grid">
-                <div className="ia-feature-card">
-                    <div style={{ fontSize: "2rem", marginBottom: "0.75rem" }}>🔍</div>
-                    <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "1.1rem", marginBottom: "0.5rem" }}>
-                        Búsqueda Natural
-                    </h3>
-                    <p style={{ color: "var(--text-secondary)", fontSize: "0.85rem", lineHeight: 1.6 }}>
+                <article className="ia-feature-card">
+                    <span className="ia-feature-icon">🔍</span>
+                    <h3 className="ia-feature-title">Búsqueda Natural</h3>
+                    <p className="ia-feature-desc">
                         Describí lo que buscás en tus palabras: &ldquo;departamento luminoso en Palermo con balcón&rdquo;
                     </p>
-                </div>
+                </article>
 
-                <div className="ia-feature-card">
-                    <div style={{ fontSize: "2rem", marginBottom: "0.75rem" }}>💡</div>
-                    <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "1.1rem", marginBottom: "0.5rem" }}>
-                        Recomendaciones
-                    </h3>
-                    <p style={{ color: "var(--text-secondary)", fontSize: "0.85rem", lineHeight: 1.6 }}>
+                <article className="ia-feature-card">
+                    <span className="ia-feature-icon">💡</span>
+                    <h3 className="ia-feature-title">Recomendaciones</h3>
+                    <p className="ia-feature-desc">
                         El sistema aprende de tus preferencias y te sugiere propiedades relevantes.
                     </p>
-                </div>
+                </article>
 
-                <div className="ia-feature-card">
-                    <div style={{ fontSize: "2rem", marginBottom: "0.75rem" }}>📊</div>
-                    <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "1.1rem", marginBottom: "0.5rem" }}>
-                        Análisis de Mercado
-                    </h3>
-                    <p style={{ color: "var(--text-secondary)", fontSize: "0.85rem", lineHeight: 1.6 }}>
+                <article className="ia-feature-card">
+                    <span className="ia-feature-icon">📊</span>
+                    <h3 className="ia-feature-title">Análisis de Mercado</h3>
+                    <p className="ia-feature-desc">
                         Compará precios, tendencias y valoraciones para tomar mejores decisiones.
                     </p>
-                </div>
+                </article>
             </div>
 
             {/* CTA */}
-            <div style={{ textAlign: "center", padding: "3rem 0 1rem", borderTop: "1px solid #f0f0f0" }}>
-                <p style={{ color: "var(--text-secondary)", marginBottom: "0.75rem", fontSize: "0.9rem" }}>
-                    Estamos trabajando en esta funcionalidad. ¡Pronto disponible!
-                </p>
-                <span style={{
-                    display: "inline-block",
-                    padding: "0.5rem 1.25rem",
-                    background: "#f5f5f5",
-                    borderRadius: "999px",
-                    fontSize: "0.8rem",
-                    fontWeight: 500,
-                    color: "var(--text-secondary)",
-                }}>
-                    🚧 Próximamente
-                </span>
+            <div className="ia-cta">
+                <p>Estamos trabajando en esta funcionalidad. ¡Pronto disponible!</p>
+                <span className="ia-cta-badge">🚧 Próximamente</span>
             </div>
         </main>
     );

@@ -1,20 +1,26 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import AuthButton from "@/components/AuthButton";
+import {
+    DropdownMenu,
+    DropdownMenuTrigger,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 
 export default function Navbar() {
+    const router = useRouter();
     const [menuOpen, setMenuOpen] = useState(false);
     const pathname = usePathname();
 
-    // Close menu on route change
     useEffect(() => {
         setMenuOpen(false);
     }, [pathname]);
 
-    // Close menu on ESC key
     useEffect(() => {
         if (!menuOpen) return;
         const handleEsc = (e: KeyboardEvent) => {
@@ -24,7 +30,6 @@ export default function Navbar() {
         return () => document.removeEventListener("keydown", handleEsc);
     }, [menuOpen]);
 
-    // Prevent body scroll when menu is open
     useEffect(() => {
         if (menuOpen) {
             document.body.style.overflow = "hidden";
@@ -50,7 +55,6 @@ export default function Navbar() {
                 PROPIEDADES ARGENTINAS
             </Link>
 
-            {/* Hamburger toggle — visible only <900px via CSS */}
             <button
                 className="nav-toggle"
                 onClick={toggleMenu}
@@ -62,16 +66,45 @@ export default function Navbar() {
                 <span className={`nav-toggle-bar${menuOpen ? " open" : ""}`} />
             </button>
 
-            {/* Overlay backdrop */}
             <div
                 className={`mobile-menu-overlay${menuOpen ? " open" : ""}`}
                 onClick={closeMenu}
             />
 
-            {/* Mobile drawer / desktop inline */}
             <div className={`mobile-menu${menuOpen ? " open" : ""}`}>
                 <div className="nav-links">
-                    <Link href="/propiedades">Propiedades</Link>
+                    {/* Dropdown for Propiedades */}
+                    <DropdownMenu>
+                        <DropdownMenuTrigger className="nav-dropdown-trigger">
+                            Propiedades <span className="nav-caret">▾</span>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuItem onSelect={() => router.push("/propiedades")}>
+                                Ver todas
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onSelect={() => router.push("/propiedades?op=buy")}>
+                                Comprar
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onSelect={() => router.push("/propiedades?op=rent")}>
+                                Alquilar
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onSelect={() => router.push("/propiedades?op=temp")}>
+                                Temporario
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onSelect={() => router.push("/propiedades?type=casa")}>
+                                Casas
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onSelect={() => router.push("/propiedades?type=depto")}>
+                                Departamentos
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onSelect={() => router.push("/propiedades?type=terreno")}>
+                                Terrenos
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
                     <Link href="/explorar">
                         Explorar <span className="nav-tag">Reel</span>
                     </Link>

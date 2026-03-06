@@ -6,7 +6,7 @@ import { toPropertyView } from "@/lib/supabase/types";
 import { opLabels, getBaseUrl } from "@/lib/seo";
 import type { ListingRow, ListingMediaRow } from "@/lib/supabase/types";
 import HeroSection from "./HeroSection";
-import ScrollPreview from "./ScrollPreview";
+import PropertyGrid from "./PropertyGrid";
 
 export const revalidate = 300;
 
@@ -116,9 +116,6 @@ export default async function PropiedadesPage({ searchParams }: Props) {
 
     const opLabel = op ? (opLabels[op] ?? "Venta") : "";
 
-    // Serialize properties for client components
-    const previewImages = properties.slice(0, 4).map(p => ({ id: p.id, image: p.image, title: p.title }));
-
     return (
         <>
             <Navbar />
@@ -126,12 +123,7 @@ export default async function PropiedadesPage({ searchParams }: Props) {
             {/* Animated Hero with rotating words */}
             <HeroSection />
 
-            {/* Container Scroll Preview */}
-            {previewImages.length > 0 && (
-                <ScrollPreview images={previewImages} count={properties.length} />
-            )}
-
-            {/* Listings */}
+            {/* Listings with scroll reveal */}
             <section className="content-section">
                 <div className="text-block centered">
                     <h2>{op ? `Propiedades en ${opLabel}` : "Todas las Propiedades"}</h2>
@@ -143,16 +135,7 @@ export default async function PropiedadesPage({ searchParams }: Props) {
                 </div>
 
                 {properties.length > 0 ? (
-                    <div className="prop-grid-styled">
-                        {properties.map((property) => (
-                            <div key={property.id} style={{ position: "relative" }}>
-                                {property.isBoosted && (
-                                    <span className="property-badge-boost">⚡ Destacada</span>
-                                )}
-                                <PropertyCard property={property} />
-                            </div>
-                        ))}
-                    </div>
+                    <PropertyGrid properties={properties} />
                 ) : (
                     <div className="text-block centered" style={{ paddingTop: "2rem" }}>
                         <p>No se encontraron propiedades con esos filtros.</p>
