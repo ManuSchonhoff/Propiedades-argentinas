@@ -73,8 +73,8 @@ export default function AuthButton() {
     }
 
     return (
-        <Link href="/login" className="btn-publish">
-            Ingresar
+        <Link href="/auth" className="btn-outline btn-sm">
+            Crear cuenta / Ingresar
         </Link>
     );
 }

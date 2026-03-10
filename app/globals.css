@@ -3101,3 +3101,343 @@ a {
         --site-px: 1rem;
     }
 }
+
+/* ============================
+   NavbarPro
+   ============================ */
+.pro-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pro-nav--scrolled {
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+}
+
+.pro-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+.pro-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.pro-nav-link {
+    background: none;
+    border: none;
+    font: inherit;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.15s;
+    padding: 0;
+}
+
+.pro-nav-link:hover {
+    color: var(--text-primary);
+}
+
+.pro-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ============================
+   Pro Landing Sections
+   ============================ */
+.pro-hero {
+    padding: 6rem 0 4rem;
+    text-align: center;
+}
+
+.pro-hero-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+}
+
+.pro-hero-accent {
+    background: linear-gradient(135deg, #333, #000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.pro-hero-sub {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 550px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+}
+
+.pro-hero-ctas {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.pro-section {
+    padding: 5rem 0;
+}
+
+.pro-section--alt {
+    background: #fafafa;
+}
+
+.pro-section-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    letter-spacing: -0.5px;
+    text-align: center;
+    margin-bottom: 0.75rem;
+}
+
+.pro-section-sub {
+    color: var(--text-secondary);
+    text-align: center;
+    font-size: 0.95rem;
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.5;
+}
+
+/* Features Grid */
+.pro-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.pro-feature-card {
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: #fff;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.pro-feature-card:hover {
+    border-color: rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.pro-feature-icon {
+    display: block;
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.pro-feature-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.3px;
+}
+
+.pro-feature-desc {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+/* Steps */
+.pro-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.pro-step {
+    text-align: center;
+}
+
+.pro-step-num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5rem;
+}
+
+.pro-step-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.pro-step-desc {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* FAQ */
+.pro-faq-list {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.pro-faq-item {
+    border-bottom: 1px solid #eee;
+    padding: 1.25rem 0;
+}
+
+.pro-faq-q {
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.pro-faq-q::marker,
+.pro-faq-q::-webkit-details-marker {
+    display: none;
+}
+
+.pro-faq-a {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-top: 0.75rem;
+}
+
+/* Final CTA */
+.pro-cta-final {
+    background: #000;
+    color: #fff;
+}
+
+.pro-cta-final .pro-section-title {
+    color: #fff;
+}
+
+.pro-cta-final .pro-section-sub {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.pricing-card--selected {
+    border-color: var(--accent-dark);
+    box-shadow: 0 0 0 2px var(--accent-dark);
+}
+
+/* ============================
+   Auth Selector
+   ============================ */
+.auth-selector {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.auth-selector-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.auth-selector-sub {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+}
+
+.auth-selector-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.auth-role-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: #fff;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.auth-role-card:hover {
+    border-color: rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.auth-role-card--pro {
+    background: #fafafa;
+}
+
+.auth-role-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.auth-role-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+}
+
+.auth-role-desc {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.auth-role-cta {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--accent-dark);
+}
+
+/* ============================
+   Pro Responsive
+   ============================ */
+@media (max-width: 768px) {
+    .pro-nav-links {
+        display: none;
+    }
+
+    .pro-features-grid,
+    .pro-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .pro-hero {
+        padding: 4rem 0 3rem;
+    }
+
+    .auth-selector-cards {
+        grid-template-columns: 1fr;
+    }
+}

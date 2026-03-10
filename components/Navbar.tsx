@@ -113,7 +113,7 @@ export default function Navbar() {
                     <Link href="/pricing">Planes</Link>
                 </div>
                 <div className="nav-actions">
-                    <Link href="/publicar" className="btn-publish">
+                    <Link href="/pro" className="btn-publish">
                         Publicar propiedad
                     </Link>
                     <AuthButton />

@@ -5,7 +5,6 @@ const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
 const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
 
 export async function middleware(request: NextRequest) {
-    // Skip if Supabase is not configured
     if (!url || !key) return NextResponse.next();
 
     let supabaseResponse = NextResponse.next({ request });
@@ -33,15 +32,33 @@ export async function middleware(request: NextRequest) {
 
     const path = request.nextUrl.pathname;
 
-    // Protected routes → redirect to /login
+    // Protected routes → redirect to /auth if not logged in
     if (
         !user &&
         (path.startsWith("/dashboard") || path.startsWith("/publicar") || path.startsWith("/admin"))
     ) {
         const loginUrl = request.nextUrl.clone();
-        loginUrl.pathname = "/login";
+        loginUrl.pathname = "/auth";
         loginUrl.searchParams.set("next", path);
         return NextResponse.redirect(loginUrl);
+    }
+
+    // Plan gate for /publicar — logged in but no authorized subscription → redirect to /pro/planes
+    if (user && path.startsWith("/publicar")) {
+        const { data: sub } = await supabase
+            .from("subscriptions")
+            .select("status")
+            .eq("user_id", user.id)
+            .eq("status", "authorized")
+            .limit(1)
+            .maybeSingle();
+
+        if (!sub) {
+            const planesUrl = request.nextUrl.clone();
+            planesUrl.pathname = "/pro/planes";
+            planesUrl.searchParams.set("next", "/publicar");
+            return NextResponse.redirect(planesUrl);
+        }
     }
 
     // Auth pages → redirect to /dashboard if logged in
