@@ -2,68 +2,63 @@
 import React from "react";
 import { motion } from "motion/react";
 
-export type TestimonialItem = {
+export type Testimonial = {
     text: string;
     image: string;
     name: string;
     role: string;
 };
 
-export const TestimonialsColumn = (props: {
+export const TestimonialsColumn = ({
+    testimonials,
+    className = "",
+    duration = 15,
+}: {
+    testimonials: Testimonial[];
     className?: string;
-    testimonials: TestimonialItem[];
     duration?: number;
 }) => {
     return (
-        <div className={props.className} style={{ width: "320px", flexShrink: 0 }}>
+        <div className={`w-[320px] shrink-0 ${className}`}>
             <motion.div
-                animate={{ translateY: "-50%" }}
+                animate={{
+                    translateY: "-50%",
+                }}
                 transition={{
-                    duration: props.duration || 10,
+                    duration: duration,
                     repeat: Infinity,
                     ease: "linear",
                     repeatType: "loop",
                 }}
-                style={{ display: "flex", flexDirection: "column", gap: "1.5rem", paddingBottom: "1.5rem" }}
+                className="flex flex-col gap-6 pb-6"
             >
-                {[...new Array(2).fill(0).map((_, index) => (
+                {[...new Array(2).fill(0)].map((_, index) => (
                     <React.Fragment key={index}>
-                        {props.testimonials.map(({ text, image, name, role }, i) => (
+                        {testimonials.map(({ text, image, name, role }, i) => (
                             <div
                                 key={i}
-                                style={{
-                                    padding: "2rem",
-                                    borderRadius: "1.5rem",
-                                    border: "1px solid #e5e7eb",
-                                    boxShadow: "0 4px 24px 0 rgba(0,0,0,0.06)",
-                                    background: "#ffffff",
-                                    width: "100%",
-                                    maxWidth: "300px",
-                                    boxSizing: "border-box",
-                                }}
+                                className="w-full max-w-[320px] rounded-2xl border border-gray-200 bg-white p-8 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.06)]"
                             >
-                                <p style={{ fontSize: "0.875rem", lineHeight: "1.6", color: "#121212", margin: 0 }}>{text}</p>
-                                <div style={{ display: "flex", alignItems: "center", gap: "0.625rem", marginTop: "1.25rem" }}>
+                                <p className="text-[15px] leading-relaxed text-gray-700">{text}</p>
+                                <div className="mt-6 flex items-center gap-3">
                                     <img
-                                        width={40}
-                                        height={40}
                                         src={image}
                                         alt={name}
-                                        style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
+                                        width={44}
+                                        height={44}
+                                        className="h-11 w-11 shrink-0 rounded-full object-cover shadow-sm"
                                     />
-                                    <div style={{ display: "flex", flexDirection: "column" }}>
-                                        <span style={{ fontWeight: 600, fontSize: "0.875rem", lineHeight: "1.25", letterSpacing: "-0.01em", color: "#121212" }}>
+                                    <div className="flex flex-col">
+                                        <span className="text-[15px] font-semibold tracking-tight text-gray-900">
                                             {name}
                                         </span>
-                                        <span style={{ fontSize: "0.8rem", lineHeight: "1.25", color: "#6e6e73" }}>
-                                            {role}
-                                        </span>
+                                        <span className="text-[13px] text-gray-500">{role}</span>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </React.Fragment>
-                ))]}
+                ))}
             </motion.div>
         </div>
     );

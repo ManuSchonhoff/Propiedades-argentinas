@@ -1,9 +1,8 @@
 "use client";
 
-import { TestimonialsColumn, TestimonialItem } from "@/components/ui/testimonials-columns-1";
-import { motion } from "motion/react";
+import { TestimonialsColumn, Testimonial } from "@/components/ui/testimonials-columns-1";
 
-const testimonials: TestimonialItem[] = [
+const testimonials: Testimonial[] = [
     {
         text: "Publicamos 40 propiedades en una semana y empezamos a recibir consultas reales desde el día 1.",
         image: "https://randomuser.me/api/portraits/women/1.jpg",
@@ -64,77 +63,38 @@ const firstColumn = testimonials.slice(0, 3);
 const secondColumn = testimonials.slice(3, 6);
 const thirdColumn = testimonials.slice(6, 9);
 
-const Testimonials = () => {
+export default function Testimonials() {
     return (
-        <section style={{ margin: "5rem 0", position: "relative", overflow: "hidden" }}>
-            <div className="site-container">
-                {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    viewport={{ once: true }}
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        maxWidth: "540px",
-                        margin: "0 auto 2.5rem",
-                        textAlign: "center",
-                    }}
-                >
-                    <div
-                        style={{
-                            display: "inline-block",
-                            border: "1px solid #e5e7eb",
-                            borderRadius: "8px",
-                            padding: "0.25rem 1rem",
-                            fontSize: "0.8rem",
-                            marginBottom: "1rem",
-                            color: "#6e6e73",
-                        }}
-                    >
+        <section className="relative w-full overflow-hidden bg-white py-24 sm:py-32">
+            <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+
+                {/* Heading Block */}
+                <div className="mx-auto flex max-w-[640px] flex-col items-center justify-center text-center">
+                    <div className="mb-6 inline-flex items-center rounded-full border border-gray-200 bg-white px-4 py-1.5 text-sm font-medium text-gray-600 shadow-sm">
                         Testimonios
                     </div>
-
-                    <h2
-                        style={{
-                            fontFamily: "var(--font-display)",
-                            fontWeight: 700,
-                            fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
-                            letterSpacing: "-0.5px",
-                            lineHeight: 1.1,
-                            marginBottom: "0.75rem",
-                            color: "#121212",
-                        }}
-                    >
+                    <h2 className="mb-6 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
                         Lo que dicen las inmobiliarias
                     </h2>
-                    <p style={{ color: "#6e6e73", fontSize: "0.95rem", lineHeight: 1.5, margin: 0 }}>
+                    <p className="text-base leading-relaxed text-gray-600 sm:text-lg">
                         Experiencias reales de equipos que ya publican y gestionan propiedades en la plataforma.
                     </p>
-                </motion.div>
+                </div>
 
-                {/* Columns */}
+                {/* Columns Wrapper */}
                 <div
+                    className="relative mt-16 flex h-[700px] w-full justify-center gap-6 overflow-hidden"
                     style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        gap: "1.5rem",
-                        maxHeight: "740px",
-                        overflow: "hidden",
-                        maskImage: "linear-gradient(to bottom, transparent, black 25%, black 75%, transparent)",
-                        WebkitMaskImage: "linear-gradient(to bottom, transparent, black 25%, black 75%, transparent)",
+                        maskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
+                        WebkitMaskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)"
                     }}
                 >
-                    <TestimonialsColumn testimonials={firstColumn} duration={15} />
-                    <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
-                    <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
+                    <TestimonialsColumn testimonials={firstColumn} duration={35} />
+                    <TestimonialsColumn testimonials={secondColumn} duration={40} className="hidden md:flex" />
+                    <TestimonialsColumn testimonials={thirdColumn} duration={37} className="hidden lg:flex" />
                 </div>
+
             </div>
         </section>
     );
-};
-
-export default Testimonials;
+}
