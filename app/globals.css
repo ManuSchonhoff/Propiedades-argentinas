@@ -26,6 +26,13 @@
     --font-display: 'Space Grotesk', sans-serif;
     --site-max: 1200px;
     --site-px: 2rem;
+
+    /* shadcn CSS variables (HSL values without hsl() wrapper) */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
 }
 
 * {
