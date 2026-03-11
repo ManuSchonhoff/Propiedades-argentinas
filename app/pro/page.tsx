@@ -10,14 +10,6 @@ export const metadata: Metadata = {
 
 export default async function ProPage() {
     const db = supabase();
-    let plans: { id: string; code: string; name: string; price_ars: number; listing_limit: number }[] = [];
-    if (db) {
-        const { data } = await db
-            .from("plans")
-            .select("id, code, name, price_ars, listing_limit")
-            .order("price_ars", { ascending: true });
-        plans = data ?? [];
-    }
 
     const features = [
         { icon: "📸", title: "Publicación Premium", desc: "Fotos HD, descripción completa y ubicación precisa para cada propiedad." },
@@ -40,9 +32,6 @@ export default async function ProPage() {
         { q: "¿Puedo cambiar de plan?", a: "Sí, podés escalar o reducir tu plan en cualquier momento." },
         { q: "¿Hay contrato de permanencia?", a: "No. Todos los planes son mensuales y podés cancelar cuando quieras." },
     ];
-
-    const formatPrice = (price: number) =>
-        new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 0 }).format(price);
 
     return (
         <main>
@@ -100,40 +89,18 @@ export default async function ProPage() {
                 </div>
             </section>
 
-            {/* PLANES */}
+            {/* PLANES CTA */}
             <section id="planes" className="pro-section">
-                <div className="site-container">
+                <div className="site-container" style={{ textAlign: "center" }}>
                     <h2 className="pro-section-title">Planes</h2>
-                    <p className="pro-section-sub">Todos los precios en pesos argentinos. Sin contratos de permanencia.</p>
-                    {plans.length > 0 ? (
-                        <div className="pricing-grid">
-                            {plans.map((plan, i) => (
-                                <div key={plan.id} className={`pricing-card${i === 1 ? " pricing-card--popular" : ""}`}>
-                                    {i === 1 && <span className="pricing-badge">Más popular</span>}
-                                    <h3 className="pricing-card__name">{plan.name}</h3>
-                                    <div className="pricing-card__price">
-                                        <span className="pricing-card__amount">{formatPrice(plan.price_ars)}</span>
-                                        <span className="pricing-card__period">/mes</span>
-                                    </div>
-                                    <ul className="pricing-card__features">
-                                        <li>✓ {plan.listing_limit} publicaciones activas</li>
-                                        <li>✓ Panel de gestión</li>
-                                        {i >= 1 && <li>✓ Soporte prioritario</li>}
-                                        {i >= 1 && <li>✓ Estadísticas</li>}
-                                        {i >= 2 && <li>✓ Destacados incluidos</li>}
-                                    </ul>
-                                    <Link
-                                        href={`/pro/planes?plan=${plan.code}`}
-                                        className={`pricing-card__cta ${i === 1 ? "btn-cta" : "btn-outline"}`}
-                                    >
-                                        Elegir plan
-                                    </Link>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <p className="pro-section-sub">Los planes estarán disponibles pronto.</p>
-                    )}
+                    <p className="pro-section-sub">Explorá nuestras membresías y elegí el nivel que tu inmobiliaria necesita.</p>
+                    <Link
+                        href="/pro/planes"
+                        className="inline-flex h-12 items-center justify-center rounded-full bg-zinc-900 px-8 font-medium text-white shadow-lg shadow-zinc-900/20 transition-colors hover:bg-zinc-800"
+                        style={{ marginTop: "1.5rem" }}
+                    >
+                        Ver planes y precios →
+                    </Link>
                 </div>
             </section>
 
