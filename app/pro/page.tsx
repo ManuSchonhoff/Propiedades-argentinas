@@ -46,7 +46,7 @@ export default async function ProPage() {
                         Gestioná tus publicaciones, recibí consultas y destacá tus propiedades en el portal inmobiliario de Argentina.
                     </p>
                     <div className="pro-hero-ctas">
-                        <Link href="/registro" className="btn-cta">
+                        <Link href="/registro" className="btn-dark">
                             Crear cuenta gratis
                         </Link>
                         <Link href="#como-funciona" className="btn-outline">
@@ -127,7 +127,7 @@ export default async function ProPage() {
                 <div className="site-container" style={{ textAlign: "center" }}>
                     <h2 className="pro-section-title">¿Listo para empezar?</h2>
                     <p className="pro-section-sub">Creá tu cuenta y publicá tu primera propiedad hoy.</p>
-                    <Link href="/registro" className="btn-cta" style={{ marginTop: "1.5rem", display: "inline-block" }}>
+                    <Link href="/registro" className="btn-dark" style={{ marginTop: "1.5rem", display: "inline-block" }}>
                         Crear cuenta gratis
                     </Link>
                 </div>

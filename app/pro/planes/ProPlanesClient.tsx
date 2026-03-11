@@ -91,22 +91,8 @@ export default function ProPlanesClient({
         const isHighlight = i === 1; // "Most popular" for the middle plan
         const iconClasses = `w-6 h-6 ${isHighlight ? "text-zinc-900" : "text-zinc-600"}`;
 
-        // Lucide/Radix icons mockup
-        const getIcon = () => {
-            if (i === 0) return (
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={iconClasses}><path d="m3 11 18-5v12L3 14v-3z" /><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" /></svg>
-            );
-            if (i === 1) return (
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={iconClasses}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
-            );
-            return (
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={iconClasses}><path d="m11 17 2 2a1 1 0 1 0 3-3" /><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-5.8 5.8a1 1 0 1 0 3 3l.88-.88" /><path d="M3 11c0 5 2.5 9 7 11" /><path d="M21 11c0-5-2.5-9-7-11" /></svg>
-            );
-        };
-
         const mappedFeatures = (features[plan.code] ?? [`${plan.listing_limit} publicaciones activas`]).map((f) => ({
             name: f,
-            description: "",
             included: true
         }));
 
@@ -116,8 +102,6 @@ export default function ProPlanesClient({
                 monthly: plan.price_ars,
                 yearly: Math.floor((plan.price_ars * 12) * 0.8) // Simulated yearly logic (no active toggle rn)
             },
-            description: `Ideal para ${plan.code === 'S' ? 'empezar a operar' : plan.code === 'M' ? 'inmobiliarias en crecimiento' : 'operaciones a gran escala'}.`,
-            icon: getIcon(),
             highlight: isHighlight,
             badge: isHighlight ? "Más Popular" : undefined,
             features: mappedFeatures,

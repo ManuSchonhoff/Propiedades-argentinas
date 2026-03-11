@@ -1,15 +1,9 @@
 "use client"
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRightIcon, CheckIcon } from "@radix-ui/react-icons"
 import { cn } from "@/lib/utils"
-import Link from "next/link"
 
 export interface Feature {
     name: string
-    description: string
     included: boolean
 }
 
@@ -19,11 +13,9 @@ export interface PricingTier {
         monthly: number
         yearly: number
     }
-    description: string
     features: Feature[]
     highlight?: boolean
     badge?: string
-    icon: React.ReactNode
     buttonText: string
     loading?: boolean
     onAction: () => void
@@ -38,178 +30,89 @@ export interface PricingSectionProps {
     hideToggle?: boolean
 }
 
-function PricingSection({ tiers, className, title = "Simple, transparent pricing", subtitle, hideToggle = false }: PricingSectionProps) {
-    const [isYearly, setIsYearly] = useState(false)
-
-    const buttonStyles = {
-        default: cn(
-            "h-12 bg-white dark:bg-zinc-900",
-            "hover:bg-zinc-50 dark:hover:bg-zinc-800",
-            "text-zinc-900 dark:text-zinc-100",
-            "border border-zinc-200 dark:border-zinc-800",
-            "hover:border-zinc-300 dark:hover:border-zinc-700",
-            "shadow-sm hover:shadow-md",
-            "text-sm font-medium",
-        ),
-        highlight: cn(
-            "h-12 bg-zinc-900 dark:bg-zinc-100",
-            "hover:bg-zinc-800 dark:hover:bg-zinc-300",
-            "text-white dark:text-zinc-900",
-            "shadow-[0_1px_15px_rgba(0,0,0,0.1)]",
-            "hover:shadow-[0_1px_20px_rgba(0,0,0,0.15)]",
-            "font-semibold text-base",
-        ),
-    }
-
-    const badgeStyles = cn(
-        "px-4 py-1.5 text-sm font-medium",
-        "bg-zinc-900 dark:bg-zinc-100",
-        "text-white dark:text-zinc-900",
-        "border-none shadow-lg",
-    )
-
+function PricingSection({ tiers, className, title, subtitle }: PricingSectionProps) {
     return (
-        <section
-            className={cn(
-                "relative bg-transparent text-foreground",
-                "py-12 md:py-24",
-                "overflow-visible",
-                className,
-            )}
-        >
-            <div className="w-full max-w-6xl mx-auto">
-                <div className="flex flex-col items-center gap-4 mb-12">
-                    <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
-                        {title}
-                    </h2>
+        <section className={cn("relative py-12 md:py-24", className)}>
+            <div className="mx-auto w-full max-w-5xl px-6">
+
+                {/* Header */}
+                <div className="mb-16 flex flex-col items-center gap-4 text-center">
+                    {title && (
+                        <h2 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl" style={{ fontFamily: 'var(--font-display)' }}>
+                            {title}
+                        </h2>
+                    )}
                     {subtitle && (
-                        <p className="text-zinc-600 dark:text-zinc-400 text-center max-w-xl">
+                        <p className="max-w-xl text-base text-zinc-500">
                             {subtitle}
                         </p>
                     )}
-
-                    {!hideToggle && (
-                        <div className="mt-4 inline-flex items-center p-1.5 bg-white dark:bg-zinc-800/50 rounded-full border border-zinc-200 dark:border-zinc-700 shadow-sm">
-                            {["Monthly", "Yearly"].map((period) => (
-                                <button
-                                    key={period}
-                                    onClick={() => setIsYearly(period === "Yearly")}
-                                    className={cn(
-                                        "px-8 py-2.5 text-sm font-medium rounded-full transition-all duration-300",
-                                        (period === "Yearly") === isYearly
-                                            ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-lg"
-                                            : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100",
-                                    )}
-                                >
-                                    {period}
-                                </button>
-                            ))}
-                        </div>
-                    )}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch justify-center">
-                    {tiers.map((tier) => (
+                {/* Grid */}
+                <div className="mx-auto grid max-w-lg grid-cols-1 items-stretch gap-8 lg:max-w-none lg:grid-cols-3">
+                    {tiers.map((tier, i) => (
                         <div
                             key={tier.name}
                             className={cn(
-                                "relative group backdrop-blur-sm",
-                                "rounded-3xl transition-all duration-300",
-                                "flex flex-col",
+                                "relative flex flex-col rounded-3xl bg-white p-8",
                                 tier.highlight
-                                    ? "bg-gradient-to-b from-zinc-100/80 to-transparent dark:from-zinc-400/[0.15]"
-                                    : "bg-white dark:bg-zinc-800/50",
-                                "border",
-                                tier.highlight
-                                    ? "border-zinc-400/50 dark:border-zinc-400/20 shadow-xl"
-                                    : "border-zinc-200 dark:border-zinc-700 shadow-md",
-                                "hover:-translate-y-1 hover:shadow-lg",
+                                    ? "border-2 border-zinc-900 shadow-xl"
+                                    : "border border-zinc-200 shadow-sm"
                             )}
                         >
+                            {/* Outstanding Badge */}
                             {tier.badge && tier.highlight && (
-                                <div className="absolute -top-4 left-6">
-                                    <Badge className={badgeStyles}>{tier.badge}</Badge>
+                                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-zinc-900 px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-white shadow-sm" style={{ whiteSpace: 'nowrap' }}>
+                                    {tier.badge}
                                 </div>
                             )}
 
-                            <div className="p-8 flex-1">
-                                <div className="flex items-center justify-between mb-4">
-                                    <div
-                                        className={cn(
-                                            "p-3 rounded-xl",
-                                            tier.highlight
-                                                ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
-                                                : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400",
-                                        )}
-                                    >
-                                        {tier.icon}
-                                    </div>
-                                    <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
-                                        {tier.name}
-                                    </h3>
-                                </div>
-
-                                <div className="mb-6">
-                                    <div className="flex items-baseline gap-2">
-                                        <span className="text-4xl font-bold text-zinc-900 dark:text-zinc-100">
-                                            ${isYearly ? tier.price.yearly.toLocaleString() : tier.price.monthly.toLocaleString()}
-                                        </span>
-                                        <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                                            /{isYearly ? "año" : "mes"}
-                                        </span>
-                                    </div>
-                                    <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                                        {tier.description}
-                                    </p>
-                                </div>
-
-                                <div className="space-y-4">
-                                    {tier.features.map((feature) => (
-                                        <div key={feature.name} className="flex gap-4">
-                                            <div
-                                                className={cn(
-                                                    "mt-1 p-0.5 rounded-full transition-colors duration-200 shrink-0",
-                                                    feature.included
-                                                        ? "text-emerald-600 dark:text-emerald-400"
-                                                        : "text-zinc-400 dark:text-zinc-600",
-                                                )}
-                                            >
-                                                <CheckIcon className="w-4 h-4" />
-                                            </div>
-                                            <div>
-                                                <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100 leading-tight">
-                                                    {feature.name}
-                                                </div>
-                                                {feature.description && (
-                                                    <div className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-0.5">
-                                                        {feature.description}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </div>
-                                    ))}
+                            {/* Plan Name & Price */}
+                            <div className="mb-8 text-center">
+                                <h3 className="mb-4 text-lg font-medium text-zinc-600">
+                                    {tier.name}
+                                </h3>
+                                <div className="flex items-baseline justify-center gap-1.5" style={{ fontFamily: 'var(--font-display)' }}>
+                                    <span className="text-4xl font-bold text-zinc-900 tracking-tight">
+                                        ${tier.price.monthly.toLocaleString("es-AR")}
+                                    </span>
+                                    <span className="text-sm font-medium text-zinc-500">/mes</span>
                                 </div>
                             </div>
 
-                            <div className="p-8 pt-0 mt-auto flex flex-col gap-3">
-                                <Button
+                            {/* Features */}
+                            <ul className="mb-10 flex-1 space-y-4">
+                                {tier.features.map((feature, j) => (
+                                    <li key={j} className="flex items-start gap-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mt-[3px] h-4 w-4 shrink-0 text-zinc-900">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                        <span className="text-[14px] leading-relaxed text-zinc-600">
+                                            {feature.name}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            {/* Action Buttons */}
+                            <div className="mt-auto flex flex-col gap-4">
+                                <button
                                     onClick={tier.onAction}
                                     disabled={tier.loading}
                                     className={cn(
-                                        "w-full relative transition-all duration-300",
+                                        "flex h-[48px] w-full items-center justify-center rounded-xl text-[15px] font-medium transition-colors disabled:opacity-50",
                                         tier.highlight
-                                            ? buttonStyles.highlight
-                                            : buttonStyles.default,
+                                            ? "bg-zinc-900 text-white hover:bg-zinc-800"
+                                            : "border border-zinc-200 bg-white text-zinc-900 hover:border-zinc-300 hover:bg-zinc-50"
                                     )}
+                                    style={{ color: tier.highlight ? 'white' : 'inherit' }}
                                 >
-                                    <span className="relative z-10 flex items-center justify-center gap-2">
-                                        {tier.loading ? "Procesando..." : tier.buttonText}
-                                        {!tier.loading && <ArrowRightIcon className="w-4 h-4" />}
-                                    </span>
-                                </Button>
+                                    {tier.loading ? "Procesando..." : tier.buttonText}
+                                </button>
 
                                 {tier.secondaryAction && (
-                                    <div className="text-center">
+                                    <div className="mt-1 flex justify-center">
                                         {tier.secondaryAction}
                                     </div>
                                 )}
