@@ -38,23 +38,23 @@ export const TestimonialsColumn = ({
                     <React.Fragment key={index}>
                         {testimonials.map(({ text, image, name, role }, i) => (
                             <div
-                                className="p-10 rounded-3xl border shadow-lg shadow-primary/10 max-w-xs w-full bg-background"
+                                className="w-full max-w-xs rounded-3xl border border-zinc-100 bg-white p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
                                 key={i}
                             >
-                                <div className="text-foreground">{text}</div>
-                                <div className="flex items-center gap-2 mt-5">
+                                <div className="text-[15px] leading-[1.6] text-zinc-600">"{text}"</div>
+                                <div className="mt-5 flex items-center gap-3">
                                     <img
                                         width={40}
                                         height={40}
                                         src={image}
                                         alt={name}
-                                        className="h-10 w-10 rounded-full object-cover"
+                                        className="h-10 w-10 shrink-0 rounded-full object-cover shadow-sm"
                                     />
                                     <div className="flex flex-col">
-                                        <div className="font-medium tracking-tight leading-5 text-foreground">
+                                        <div className="text-[14px] font-semibold leading-5 tracking-tight text-zinc-900">
                                             {name}
                                         </div>
-                                        <div className="leading-5 opacity-60 tracking-tight text-foreground">
+                                        <div className="text-[13px] leading-5 tracking-tight text-zinc-400">
                                             {role}
                                         </div>
                                     </div>
