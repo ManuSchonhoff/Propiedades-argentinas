@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase/server";
+import Testimonials from "@/components/Testimonials";
 
 export const metadata: Metadata = {
     title: "Para Inmobiliarias | Propiedades Argentinas",
@@ -150,6 +151,9 @@ export default async function ProPage() {
                     </div>
                 </div>
             </section>
+
+            {/* TESTIMONIOS */}
+            <Testimonials />
 
             {/* CTA FINAL */}
             <section className="pro-section pro-cta-final">
