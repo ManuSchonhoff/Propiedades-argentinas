@@ -1,9 +1,9 @@
 "use client";
 
-import { TestimonialsColumn, Testimonial } from "@/components/ui/testimonials-columns-1";
+import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import { motion } from "motion/react";
 
-const testimonials: Testimonial[] = [
+const testimonials = [
     {
         text: "Publicamos 40 propiedades en una semana y empezamos a recibir consultas reales desde el día 1.",
         image: "https://randomuser.me/api/portraits/women/1.jpg",
@@ -73,16 +73,15 @@ const Testimonials = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                     viewport={{ once: true }}
-                    className="flex flex-col items-center justify-center max-w-[640px] mx-auto"
+                    className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
                 >
                     <div className="flex justify-center">
                         <div className="border py-1 px-4 rounded-lg">Testimonios</div>
                     </div>
 
-                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mt-5 text-center">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter mt-5">
                         Lo que dicen las inmobiliarias
                     </h2>
-
                     <p className="text-center mt-5 opacity-75">
                         Experiencias reales de equipos que ya publican y gestionan propiedades en la plataforma.
                     </p>
