@@ -66,11 +66,11 @@ const thirdColumn = testimonials.slice(6, 9);
 export default function Testimonials() {
     return (
         <section className="relative w-full overflow-hidden bg-white py-24 sm:py-32">
-            <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+            <div className="site-container">
 
                 {/* Heading Block */}
-                <div className="mx-auto flex max-w-[640px] flex-col items-center justify-center text-center">
-                    <div className="mb-6 inline-flex items-center rounded-full border border-gray-200 bg-white px-4 py-1.5 text-sm font-medium text-gray-600 shadow-sm">
+                <div className="mx-auto w-full max-w-2xl text-center">
+                    <div className="mb-6 inline-block rounded-full border border-gray-200 bg-white px-4 py-1.5 text-sm font-medium text-gray-600 shadow-sm">
                         Testimonios
                     </div>
                     <h2 className="mb-6 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
@@ -90,8 +90,8 @@ export default function Testimonials() {
                     }}
                 >
                     <TestimonialsColumn testimonials={firstColumn} duration={35} />
-                    <TestimonialsColumn testimonials={secondColumn} duration={40} className="hidden md:flex" />
-                    <TestimonialsColumn testimonials={thirdColumn} duration={37} className="hidden lg:flex" />
+                    <TestimonialsColumn testimonials={secondColumn} duration={40} className="hidden md:block" />
+                    <TestimonialsColumn testimonials={thirdColumn} duration={37} className="hidden lg:block" />
                 </div>
 
             </div>
