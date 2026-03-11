@@ -38,23 +38,25 @@ export const TestimonialsColumn = ({
                     <React.Fragment key={index}>
                         {testimonials.map(({ text, image, name, role }, i) => (
                             <div
+                                className="p-10 rounded-3xl border shadow-lg shadow-primary/10 max-w-xs w-full bg-background"
                                 key={i}
-                                className="w-full max-w-[320px] rounded-2xl border border-gray-200 bg-white p-8 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.06)]"
                             >
-                                <p className="text-[15px] leading-relaxed text-gray-700">{text}</p>
-                                <div className="mt-6 flex items-center gap-3">
+                                <div className="text-foreground">{text}</div>
+                                <div className="flex items-center gap-2 mt-5">
                                     <img
+                                        width={40}
+                                        height={40}
                                         src={image}
                                         alt={name}
-                                        width={44}
-                                        height={44}
-                                        className="h-11 w-11 shrink-0 rounded-full object-cover shadow-sm"
+                                        className="h-10 w-10 rounded-full object-cover"
                                     />
                                     <div className="flex flex-col">
-                                        <span className="text-[15px] font-semibold tracking-tight text-gray-900">
+                                        <div className="font-medium tracking-tight leading-5 text-foreground">
                                             {name}
-                                        </span>
-                                        <span className="text-[13px] text-gray-500">{role}</span>
+                                        </div>
+                                        <div className="leading-5 opacity-60 tracking-tight text-foreground">
+                                            {role}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
