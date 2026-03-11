@@ -67,7 +67,7 @@ const thirdColumn = testimonials.slice(6, 9);
 const Testimonials = () => {
     return (
         <section className="bg-background my-20 relative">
-            <div className="site-container z-10 mx-auto">
+            <div className="container z-10 mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}

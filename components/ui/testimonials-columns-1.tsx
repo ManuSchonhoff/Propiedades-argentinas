@@ -2,16 +2,18 @@
 import React from "react";
 import { motion } from "motion/react";
 
-export type Testimonial = {
-    text: string;
-    image: string;
-    name: string;
-    role: string;
-};
+const testimonials = [
+    {
+        text: "",
+        image: "",
+        name: "",
+        role: "",
+    },
+];
 
 export const TestimonialsColumn = (props: {
     className?: string;
-    testimonials: Testimonial[];
+    testimonials: typeof testimonials;
     duration?: number;
 }) => {
     return (
