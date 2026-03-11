@@ -21,9 +21,11 @@ export const TestimonialsColumn = ({
     return (
         <div className={`w-[320px] shrink-0 ${className}`}>
             <motion.div
+                initial={{ y: 0 }}
                 animate={{
-                    translateY: "-50%",
+                    y: "-50%",
                 }}
+                style={{ willChange: "transform" }}
                 transition={{
                     duration: duration,
                     repeat: Infinity,
