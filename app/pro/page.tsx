@@ -96,7 +96,7 @@ export default async function ProPage() {
                     <p className="pro-section-sub">Explorá nuestras membresías y elegí el nivel que tu inmobiliaria necesita.</p>
                     <Link
                         href="/pro/planes"
-                        className="btn-cta"
+                        className="inline-flex h-12 items-center justify-center rounded-full bg-zinc-900 px-8 font-medium !text-white shadow-lg shadow-zinc-900/20 transition-colors hover:bg-zinc-800"
                         style={{ marginTop: "1.5rem", display: "inline-block" }}
                     >
                         Ver planes y precios →
